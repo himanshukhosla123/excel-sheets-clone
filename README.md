@@ -24,4 +24,6 @@ Backend -
 
 Note:-Reason for making it a full stack is scalability in terms of handling excel sheets of any size and search through it easily. Could have used webworkers to parse heavy csv on frontend browser but it was not an ideal solution.
 
+Also have pushed env for zero setup
+
 
