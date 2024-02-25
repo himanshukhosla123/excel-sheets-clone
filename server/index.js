@@ -1,10 +1,13 @@
 const express = require("express");
 const dotenv = require("dotenv");
+const apicache =  require('apicache');
 
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 8080;
+
+app.use(apicache.middleware('60 minutes'))
 
 const userRoutes = require("./routes/uploadRoute");
 app.use("/", userRoutes);

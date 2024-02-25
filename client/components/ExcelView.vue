@@ -1,9 +1,9 @@
 <template>
-  <div class="h-screen bg-gray-100 flex flex-col justify-center items-center ">
+  <div class="h-screen bg-gray-100 flex flex-col md:justify-center p-2 pt-16 md:pt-0 md:items-center ">
       <!-- Phone -->
-      <main class="relative overflow-hidden w-96 h-[640px] rounded-2xl bg-black shadow-lg shadow-black/40 p-2 text-white">
+      <main class="relative overflow-hidden w-full md:w-96 h-[640px] rounded-2xl bg-black shadow-lg shadow-black/40 p-2 text-white">
         <!-- Screen -->
-        <div class="relative  w-full h-full bg-white rounded-lg flex flex-col">
+        <div class="relative w-full h-full bg-white rounded-lg flex flex-col">
 
           <!-- Content Section -->
           <main 
@@ -36,10 +36,12 @@
             style="box-shadow: 0 2px 6px -2px rgb(0 106 194 / 20%)"
             class="absolute fixed bottom-0 left-0 w-full h-15 rounded-b-lg flex flex-row justify-between items-center text-gray-400 border-t bg-gray-800">
             <template v-for="(file,index) in files">
-              <button :class="`flex-1 overflow-hidden flex flex-col p-2 text-black border border-gray border-solid ${index == activeFileIndex ? ' bg-white' : 'bg-gray-200'}`" 
+              <button 
+                :title="file.originalname"
+                :class="`flex-1 overflow-hidden flex flex-col p-2 text-black border border-gray border-solid ${index == activeFileIndex ? ' bg-white' : 'bg-gray-200'}`" 
                 :key="file._id" @click="()=>selectFile(file, index)">
                 <p class="text- break-words">File {{index+1}}</p>
-                <p class="w-full text-left text-xs break-words text-ellipsis overflow-hidden whitespace-nowrap max-h-4">{{file.originalname}}</p>
+                <p class="w-full text-left text-xs break-words overflow-ellipsis overflow-hidden whitespace-nowrap max-h-4">{{file.originalname}}</p>
               </button>
             </template>
           </nav>

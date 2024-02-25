@@ -2,21 +2,22 @@
   <div class=""> 
     <Dropzone 
       id="foo" v-if="files.length < MAX_NUMBER_OF_SHEETS" 
-      class="fixed bottom-4 right-14 p-3 cursor-pointer px-4 w-64 bg-green-800 w-3/12 rounded text-white text-center" ref="el" 
-      :options="options" :use-custom-slot="true" 
+      class="fixed bottom-4 border-2 border-gray-200 border-solid md:border-0 bottom-6 md:right-14 right-4 p-3 md:px-4 z-30 cursor-pointer rounded-full md:rounded md:w-64 bg-green-800 w-12 md:w-3/12 text-white text-center" ref="el" 
+      :options="options" 
+      :use-custom-slot="true" 
       :destroy-dropzone="true" 
       @vdropzone-success="onFileUpload"
       @vdropzone-sending="()=>fileUploading=true"
       @vdropzone-error="onUploadError"
       @vdropzone-canceled="onUploadError"
-      
     >
-      {{fileUploading ? 'Uploading your File...':'Upload new excel'}}
+      <p class="hidden md:block">{{fileUploading ? 'Uploading your File...':'Upload new excel'}}</p>
+      <p class="block md:hidden" :class="{'scale-15': !fileUploading}">{{fileUploading ? 'Uploading...':'+'}}</p>
     </Dropzone>
     <Header></Header>
-    <div class="flex w-full flex-row items-center pt-14">
-      <ExcelView class="w-8/12" :files="files" :active-file-index="activeFileIndex" @onFileChange="onFileChange"/>
-      <ExcelInfoSection class="w-4/12" :active-file="files[activeFileIndex]" />
+    <div class="flex w-full flex-col md:flex-row items-center pt-14">
+      <ExcelView class="w-full md:w-8/12" :files="files" :active-file-index="activeFileIndex" @onFileChange="onFileChange"/>
+      <ExcelInfoSection class="w-full md:w-4/12" :active-file="files[activeFileIndex]" />
     </div>
   </div>
 </template>
@@ -53,7 +54,7 @@ export default {
   created(){
     this.MAX_NUMBER_OF_SHEETS = MAX_NUMBER_OF_SHEETS;
     this.options = {
-      acceptedFiles:".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel",
+      acceptedFiles:".csv",
       disablePreviews:true,
       // uploadMultiple: false,
       // maxFilesize: {
@@ -140,5 +141,9 @@ export default {
     transform: rotate(360deg);
     -webkit-transform: rotate(360deg);
   }
+}
+
+.scale-15{
+  transform: scale(2);
 }
 </style>

@@ -1,4 +1,5 @@
 const csv = require("csvtojson");
+const apicache =  require('apicache');
 const {connectToCluster} = require("./../utils/dbConnector");
 
 const uploadExcelSheet = async (req, res) => {
@@ -7,6 +8,9 @@ const uploadExcelSheet = async (req, res) => {
         .fromFile(req.file.path)
         .then(async (json) => {
           console.log(req.file);
+
+          // clear cache
+          apicache.clear('getAllUserSheets')
 
           // save file entry
           const client = await connectToCluster();
@@ -27,8 +31,7 @@ const uploadExcelSheet = async (req, res) => {
           await filesContentCollection.insertMany(finalData);
 
           res.send({status: 200, success: false, data: { ...req.file, _id: resp.insertedId }});
-        })
-        .catch((err) => console.error(err));
+        });
   } catch (err) {
     res.send({status: 400, success: false, msg: err.message});
   }

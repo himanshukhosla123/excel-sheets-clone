@@ -1,8 +1,11 @@
 const csv = require('csvtojson');
+// const apicache =  require('apicache');
 const { connectToCluster } = require('../utils/dbConnector');
 
 const getUserExcels = async (req, res) => {
     try{
+        // cache group
+        req.apicacheGroup = 'getAllUserSheets';
 
         const client = await connectToCluster();
         const db = client.db('files');

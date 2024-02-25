@@ -9,7 +9,7 @@
     </template>
     <div 
       @click="()=>onSelect(source)"
-      class="border-bm flex flex-row item-center cursor-pointer border-gray border-solid bg-white">
+      class="border-bm flex flex-row item-center cursor-pointer border-gray border-solid bg-white hover:bg-gray-100">
       <div class="text-gray px-3 py-2 text-center" style="min-width:47px;border-right: 1px solid #ccc">{{index+1}}</div>
       <div @click="()=>onSelect(source)" class="break-words px-3 py-2 min-h-4 text-black word-break">{{ source[firstkey] }}</div>
     </div>
